@@ -12,13 +12,11 @@ RSpec.describe Merchant do
   end
 
   describe "class methods" do
-
   end
 
   describe "instance methods" do
     describe "#favorite_customers" do
       it "should return the customers ordered from most transactions to least" do
-
       end
     end
   end

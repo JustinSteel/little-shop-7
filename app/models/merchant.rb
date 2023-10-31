@@ -6,10 +6,8 @@ class Merchant < ApplicationRecord
   enum status: %w[disabled enabled]
 
   def favorite_customers
-
   end
 
   def customers_by_num_trx(sorted)
-    
   end
 end
