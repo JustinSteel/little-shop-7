@@ -6,5 +6,7 @@ FactoryBot.define do
     description { Faker::Commerce.material }
     unit_price { Faker::Commerce.price }
     status { rand(0..1)}
+
+    association :merchant, factory: :merchant
   end
 end
