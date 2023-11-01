@@ -2,13 +2,46 @@ require "rails_helper"
 
 RSpec.describe "Merchant Invoices Index", type: :feature do
   describe "When a user visits merchant's invoices index, there is information" do
-    xit "They see all invoices with at least one of merchant's items" do
-      visit merchant_invoices_path(@merchant1)
+    before(:each) do
+      @merchant_1 = create(:merchant)
+      @item_1 = create(:item, merchant: @merchant_1)
+   
+      @invoices_with_item = []
+      @invoices_without_item = []
 
-      expect(page).to have_content("My Invoices", count:1)
+      3.times do
+        customer_1 = create(:customer)
+
+        invoice_with = create(:invoice, customer: customer_1)
+        create(:invoice_item, item: @item_1, invoice: invoice_with)
+        @invoices_with_item << invoice_with
+
+        invoice_without = create(:invoice, customer: customer_1)
+        create(:invoice_item, invoice: invoice_with)
+        @invoices_without_item << invoice_without
+      end
     end
 
-    it "They see each invoice with its id that links the to the merchant invoice show page" do
+    it "They see all invoices with at least one of merchant's items" do
+      visit merchant_invoices_path(@merchant_1)
+
+      @invoices_with_item.each do |invoice|
+        expect(page).to have_content("Invoice ##{invoice.id}")
+      end
+
+      @invoices_without_item.each do |invoice|
+        expect(page).to_not have_content(invoice.id)
+      end
+    end
+
+    xit "They see each invoice links to the merchant invoice show page" do
+      visit merchant_invoices_path(@merchant_1)
+
+      @invoices_with_item.each do |invoice|
+        click_link("#{invoice.id}")
+        expect(current_path).to eq(merchant_invoice_path(invoice))
+        visit merchant_invoices_path(@merchant_1)
+      end
     end
   end
   
