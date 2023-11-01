@@ -23,7 +23,7 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
 
     it "They see customer first and last name" do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
-
+save_and_open_page
       expect(page).to have_content("Customer: #{@invoice_1.customer_full_name}")
     end
   end
