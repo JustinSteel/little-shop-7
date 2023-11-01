@@ -11,4 +11,12 @@ class Invoice < ApplicationRecord
   def self.invoices_for_merchant(merchant_id)
     select("invoices.*").joins(invoice_items: :item).where("merchant_id = ?", merchant_id)
   end
+
+  def formatted_date
+    created_at.strftime("%A, %B %d, %Y")
+  end
+
+  def customer_full_name
+    "#{customer.first_name} #{customer.last_name}"
+  end
 end

@@ -40,4 +40,14 @@ RSpec.describe Invoice do
     end
   end
 
+  describe 'instance methods' do
+    describe '#customer_full_name' do
+      it 'returns' do
+        customer_1 = Customer.create!(first_name: "Lucas", last_name: "Kleeman")
+        invoice_1 = Invoice.create!(status: "completed", customer: customer_1)
+        expect(invoice_1.customer_full_name).to eq("Lucas Kleeman")
+      end
+    end
+  end
+
 end
