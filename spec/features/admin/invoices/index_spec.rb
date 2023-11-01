@@ -6,8 +6,8 @@ RSpec.describe "Admin Invoices Dashboard" do
   end
 
   # US 32
-  describe "As an admin, When I visit the admin merchants index (/admin/merchants)" do
-    it "I see the name of each merchant in the system" do
+  describe "As an admin, When I visit the admin invoice index (/admin/invoice)" do
+    it "I see the id of each invoice in the system" do
 
       visit admin_invoices_path
 
