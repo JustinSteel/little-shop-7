@@ -9,10 +9,12 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
 
       @invoice_1 = create(:invoice, customer: @customer_1)
       create(:invoice_item, item: @item_1, invoice: @invoice_1)
+
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
     end
 
     it "They see invoice id, status, create date in format 'Monday, July 18, 2019'" do
-      visit merchant_invoice_path(@merchant_1, @invoice_1)
+      
 
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Status: #{@invoice_1.status}")
@@ -20,8 +22,6 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see customer first and last name" do
-      visit merchant_invoice_path(@merchant_1, @invoice_1)
-
       expect(page).to have_content("Customer: #{@invoice_1.customer_full_name}")
     end
   end
@@ -70,4 +70,26 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
       expect(page).to_not have_content(@item_2.name)
     end
   end
+ 
+  describe "When a user visits merchant's invoice show, there is item information" do
+    before(:each) do
+      @merchant_1 = create(:merchant)
+      @merchant_2 = create(:merchant)
+      @item_1a = create(:item, merchant: @merchant_1, unit_price: 10.25)
+      @item_1b = create(:item, merchant: @merchant_1, unit_price: 5.99)
+      @customer_1 = create(:customer)
+
+      @invoice_1 = create(:invoice, customer: @customer_1)
+      @invoice_2 = create(:invoice, customer: @customer_1)
+      @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1, quantity: 5)
+      @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1, quantity: 3)
+
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+    end
+
+    it "They see the total revenue that will be generated from all items on invoice" do
+      expect(page).to have_content("Total Revenue: $146.97")
+    end
+  end
+
 end
