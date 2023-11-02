@@ -5,9 +5,11 @@ namespace :csv_load do
 
     CSV.foreach("./db/data/customers.csv", headers: true) do |row|
       Customer.create!(row.to_h)
-      # Customer.create!(first_name: row[:first_name], last_name: row[:last_name], id: row[:id])
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("customers")
     p "Customers loaded from CSV"
+    # require "byebug"; byebug
   end
 
   desc "Load invoice items from CSV"
@@ -17,6 +19,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/invoices.csv", headers: true) do |row|
       Invoice.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoices")
     p "Invoice loaded from CSV"
   end
 
@@ -27,6 +31,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/merchants.csv", headers: true) do |row|
       Merchant.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("merchants")
     p "Merchants loaded from CSV"
   end
 
@@ -37,6 +43,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/items.csv", headers: true) do |row|
       Item.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("items")
     p "Items loaded from CSV"
   end
 
@@ -47,6 +55,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/transactions.csv", headers: true) do |row|
       Transaction.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("transactions")
     p "Transactions loaded from CSV"
   end
 
@@ -57,6 +67,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/invoice_items.csv", headers: true) do |row|
       InvoiceItem.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoice_items")
     p "Invoice items loaded from CSV"
   end
 
