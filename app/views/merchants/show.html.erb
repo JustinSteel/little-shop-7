@@ -1,5 +1,10 @@
 <h1><%= @merchant.name %></h1>
 
 <section class="favorite-customers">
-
+  <h3>Favorite Customers</h3>
+  <% @merchant.favorite_customers.each do | cust | %>
+      <p>
+        <%= "#{cust.first_name} #{cust.last_name} | Transactions: #{cust.count}" %>
+      </p>
+  <% end %>
 </section>
