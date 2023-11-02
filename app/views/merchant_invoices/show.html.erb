@@ -3,3 +3,20 @@
 <%= "Created on: #{@invoice.formatted_date}" %>
 <%= "Customer: #{@invoice.customer_full_name}" %>
 
+<table id="ItemTable">
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+
+  <% @invoice.items.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.quantity_on_invoice %></td>
+      <td><%= item.unit_price %></td>
+      <td><%= item.status_on_invoice %></td>
+    </tr>
+  <% end %>
+</table>

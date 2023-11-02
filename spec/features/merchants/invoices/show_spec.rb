@@ -45,8 +45,8 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see a table: item name, quantity of item ordered, price item sold for, item status" do
-      expect(page).to have_css('ItemTable')
-      within "ItemTable" do
+      expect(page).to have_css('table')
+      within :table, "ItemTable" do
         expect(page).to have_content("Item Name")
         expect(page).to have_content("Quantity")
         expect(page).to have_content("Unit Price")
@@ -54,14 +54,14 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
 
         expect(page).to have_content(@item_1a.name)
         expect(page).to have_content(@item_1a.unit_price)
-        expect(page).to have_content(@item_1a.status)
-        # Still need quantity
-        # expect(page).to have_content(@item_1a.name)
+        expect(page).to have_content(@item_1a.status_on_invoice)
+        expect(page).to have_content(@item_1a.quantity_on_invoice)
+        
+        expect(page).to have_content(@item_1b.name)
+        expect(page).to have_content(@item_1b.unit_price)
+        expect(page).to have_content(@item_1b.status_on_invoice)
+        expect(page).to have_content(@item_1b.quantity_on_invoice)
       end
-
-      # expect(page).to have_content("Invoice ##{@invoice_1.id}")
-      # expect(page).to have_content("Status: #{@invoice_1.status}")
-      # expect(page).to have_content("Created on: #{@invoice_1.formatted_date}")
     end
 
     xit "They do not see any information related to items from another merchant" do
