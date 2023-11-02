@@ -74,8 +74,8 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
   describe "When a user visits merchant's invoice show, there is item information" do
     before(:each) do
       @merchant_1 = create(:merchant)
-      @item_1a = create(:item, merchant: @merchant_1, unit_price: 10)
-      @item_1b = create(:item, merchant: @merchant_1, unit_price: 5)
+      @item_1a = create(:item, merchant: @merchant_1, unit_price: 1099)
+      @item_1b = create(:item, merchant: @merchant_1, unit_price: 16725)
       @customer_1 = create(:customer)
 
       @invoice_1 = create(:invoice, customer: @customer_1)
@@ -86,7 +86,27 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see the total revenue that will be generated from all items on invoice" do
-      expect(page).to have_content("Total Revenue: $65")  
+      save_and_open_page
+      expect(page).to have_content("Total Revenue: $556.70")  
+    end
+  end
+
+  describe 'When a user visits merchant invoice show, there is the ability to update item status' do
+    before(:each) do
+      @merchant_1 = create(:merchant)
+      @item_1a = create(:item, merchant: @merchant_1)
+      @item_1b = create(:item, merchant: @merchant_1)
+      @customer_1 = create(:customer)
+
+      @invoice_1 = create(:invoice, customer: @customer_1)
+      @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1)
+      @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1)
+
+      visit merchant_invoice_path(@merchant_1, @invoice_1)
+    end
+
+    xit "They see that each invoice item status is a select field" do
+      expect().to
     end
   end
 
