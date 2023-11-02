@@ -9,4 +9,12 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: true
   validates :status, presence: true
+
+  def quantity_on_invoice_item
+
+  end
+
+  def status_on_invoice_item
+    
+  end
 end
