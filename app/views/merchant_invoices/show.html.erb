@@ -12,12 +12,12 @@
     <th>Status</th>
   </tr>
 
-  <% @invoice.items.each do |item| %>
+  <% @invoice.invoice_items.each do |invoice_item| %>
     <tr>
-      <td><%= item.name %></td>
-      <td><%= item.quantity_on_invoice_item %></td>
-      <td><%= item.unit_price %></td>
-      <td><%= item.status_on_invoice_item %></td>
+      <td><%= invoice_item.item.name %></td>
+      <td><%= invoice_item.quantity %></td>
+      <td><%= invoice_item.item.unit_price %></td>
+      <td><%= invoice_item.status %></td>
     </tr>
   <% end %>
 </table>
