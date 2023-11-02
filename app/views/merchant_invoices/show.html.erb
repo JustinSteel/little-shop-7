@@ -14,9 +14,9 @@
   <% @invoice.items.each do |item| %>
     <tr>
       <td><%= item.name %></td>
-      <td><%= item.quantity_on_invoice %></td>
+      <td><%= item.quantity_on_invoice_item %></td>
       <td><%= item.unit_price %></td>
-      <td><%= item.status_on_invoice %></td>
+      <td><%= item.status_on_invoice_item %></td>
     </tr>
   <% end %>
 </table>

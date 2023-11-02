@@ -56,11 +56,11 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
         expect(page).to have_content(@item_1a.unit_price)
         expect(page).to have_content(@item_1a.status_on_invoice)
         expect(page).to have_content(@item_1a.quantity_on_invoice)
-        
+
         expect(page).to have_content(@item_1b.name)
         expect(page).to have_content(@item_1b.unit_price)
-        expect(page).to have_content(@item_1b.status_on_invoice)
-        expect(page).to have_content(@item_1b.quantity_on_invoice)
+        expect(page).to have_content(@item_1b.status_on_invoice_item)
+        expect(page).to have_content(@item_1b.quantity_on_invoice_item)
       end
     end
 
