@@ -2,7 +2,7 @@
 <br>
 <div id="invoice-details">
   <p>Date Created: <%= @invoice.formatted_date %></p>
-  <p>Customer Name: <%= @invoice.customer_name %></p>
+  <p>Customer: <%= @invoice.customer_name %></p>
   <p>Status: <%= @invoice.status %></p>
 </div>
 <br>
@@ -18,3 +18,7 @@
     </div>
   <% end %>
 </div>  
+<br>
+<div id="total-revenue">
+  <p>Total Revenue: <%= @invoice.total_revenue %></p>
+</div>
