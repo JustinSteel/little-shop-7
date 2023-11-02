@@ -74,22 +74,19 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
   describe "When a user visits merchant's invoice show, there is item information" do
     before(:each) do
       @merchant_1 = create(:merchant)
-      @merchant_2 = create(:merchant)
-      @item_1a = create(:item, merchant: @merchant_1, unit_price: 10.25)
-      @item_1b = create(:item, merchant: @merchant_1, unit_price: 5.99)
+      @item_1a = create(:item, merchant: @merchant_1, unit_price: 10)
+      @item_1b = create(:item, merchant: @merchant_1, unit_price: 5)
       @customer_1 = create(:customer)
 
       @invoice_1 = create(:invoice, customer: @customer_1)
-      @invoice_2 = create(:invoice, customer: @customer_1)
       @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1, quantity: 5)
       @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1, quantity: 3)
 
       visit merchant_invoice_path(@merchant_1, @invoice_1)
     end
 
-    xit "They see the total revenue that will be generated from all items on invoice" do
-      expect(page).to have_content("Total Revenue: $146.97")
-      # <%= "Total Revenue: $#{@invoice.total_revenue}" %>
+    it "They see the total revenue that will be generated from all items on invoice" do
+      expect(page).to have_content("Total Revenue: $65")  
     end
   end
 
