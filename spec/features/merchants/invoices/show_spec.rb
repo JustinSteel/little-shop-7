@@ -121,7 +121,6 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They select a new status for the item, click on Update Item Status" do
-
       within "#ItemStatus-#{@item_1a.id}" do
         select("packaged", from: :status)
         click_button("Update Item Status")
@@ -141,6 +140,21 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
         expect(page).to have_content("shipped")
       end
     end
+
+    it "They see an error message when status is not changed, and page rerenders" do
+      within "#ItemStatus-#{@item_1a.id}" do
+        select("pending", from: :status)
+        click_button("Update Item Status")
+      end
+
+      expect(page).to have_content("Status must be changed")
+
+      within "#ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_content("packaged")
+      end
+    end
+
+
   end
 
 end
