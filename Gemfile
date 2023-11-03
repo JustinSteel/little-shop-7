@@ -58,7 +58,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "capybara"
   gem "byebug"
-  gem "standard"
+  # gem "standard"
   gem "shoulda-matchers"
   gem "simplecov"
   gem "launchy"
