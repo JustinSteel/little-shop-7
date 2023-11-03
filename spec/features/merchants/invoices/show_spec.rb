@@ -101,26 +101,26 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
       @invoice_1 = create(:invoice, customer: @customer_1)
       @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1, status: 0)
       @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1, status: 1)
-      @invoice_item_1b = create(:invoice_item, item: @item_1c, invoice: @invoice_1, status: 2)
+      @invoice_item_1c = create(:invoice_item, item: @item_1c, invoice: @invoice_1, status: 2)
 
       visit merchant_invoice_path(@merchant_1, @invoice_1)
     end
 
     it "They see that each invoice item status is a select field" do
       expect(page).to have_select("ItemStatus-#{@item_1a.id}")
-      expect(page).to have_select("ItemStatus-#{@item_2a.id}")
-      expect(page).to have_select("ItemStatus-#{@item_2c.id}")
+      expect(page).to have_select("ItemStatus-#{@item_1b.id}")
+      expect(page).to have_select("ItemStatus-#{@item_1c.id}")
 
       within :select, "ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content(pending) 
+        expect(page).to have_content("pending") 
       end
 
-      within :select, "ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content(packaged) 
+      within :select, "ItemStatus-#{@item_1b.id}" do
+        expect(page).to have_content("packaged") 
       end
-      
-      within :select, "ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content(shipped) 
+
+      within :select, "ItemStatus-#{@item_1c.id}" do
+        expect(page).to have_content("shipped") 
       end
     end
   end
