@@ -4,6 +4,10 @@
 <p><%= link_to "#{@merchant.name} Items", merchant_items_path(@merchant) %></p>
 <p><%= link_to "#{@merchant.name} Invoices", merchant_invoices_path(@merchant) %></p>
 
+<section class="ship-items">
+  <h3>Items to Ship</h3>
+</section>
+
 <section class="favorite-customers">
   <h3>Favorite Customers</h3>
   <% @merchant.favorite_customers.each do | cust | %>

@@ -21,6 +21,7 @@ RSpec.describe "Merchant Dashboard" do
     expect(page).to have_link("#{merchant.name} Items")
     # And I see a link to my merchant invoices index (/merchants/:merchant_id/invoices)
     expect(page).to have_link("#{merchant.name} Invoices")
+  end
 
   before(:each) do
     load_test_data
@@ -45,6 +46,25 @@ RSpec.describe "Merchant Dashboard" do
     within(".favorite-customers") do
       @merchant1.favorite_customers.each do |cust|
         expect(page).to have_content "#{cust.first_name} #{cust.last_name} | Transactions: #{cust.count}"
+      end
+    end
+  end
+
+  it "has a section of items ready to ship" do
+    # 4. Merchant Dashboard Items Ready to Ship
+    # As a merchant
+    # When I visit my merchant dashboard (/merchants/:merchant_id/dashboard)
+    # Then I see a section for "Items Ready to Ship"
+    # In that section I see a list of the names of all of my items that
+    # have been ordered and have not yet been shipped,
+    # And next to each Item I see the id of the invoice that ordered my item
+    # And each invoice id is a link to my merchant's invoice show page
+    visit dashboard_merchant_path(@merchant1)
+
+    within ".ship-items" do
+      @merchant1.items_ready_to_ship.each do |item|
+        expect(page).to have_content "#{item.name} | Invoice ID: #{item.invoice_id}"
+        assert page.has_link?(href: merchant_invoice_path(@merchant1, item.invoice))
       end
     end
   end
