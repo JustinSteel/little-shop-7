@@ -86,7 +86,6 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see the total revenue that will be generated from all items on invoice" do
-      save_and_open_page
       expect(page).to have_content("Total Revenue: $556.70")  
     end
   end
@@ -96,17 +95,33 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
       @merchant_1 = create(:merchant)
       @item_1a = create(:item, merchant: @merchant_1)
       @item_1b = create(:item, merchant: @merchant_1)
+      @item_1c = create(:item, merchant: @merchant_1)
       @customer_1 = create(:customer)
 
       @invoice_1 = create(:invoice, customer: @customer_1)
-      @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1)
-      @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1)
+      @invoice_item_1a = create(:invoice_item, item: @item_1a, invoice: @invoice_1, status: 0)
+      @invoice_item_1b = create(:invoice_item, item: @item_1b, invoice: @invoice_1, status: 1)
+      @invoice_item_1b = create(:invoice_item, item: @item_1c, invoice: @invoice_1, status: 2)
 
       visit merchant_invoice_path(@merchant_1, @invoice_1)
     end
 
-    xit "They see that each invoice item status is a select field" do
-      expect().to
+    it "They see that each invoice item status is a select field" do
+      expect(page).to have_select("ItemStatus-#{@item_1a.id}")
+      expect(page).to have_select("ItemStatus-#{@item_2a.id}")
+      expect(page).to have_select("ItemStatus-#{@item_2c.id}")
+
+      within :select, "ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_content(pending) 
+      end
+
+      within :select, "ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_content(packaged) 
+      end
+      
+      within :select, "ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_content(shipped) 
+      end
     end
   end
 
