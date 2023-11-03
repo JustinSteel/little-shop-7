@@ -19,7 +19,11 @@
       <td><%= invoice_item.quantity %></td>
       <td><%= "$#{format('%.2f', (invoice_item.item.unit_price / 100.0))}" %></td>
       <td>
-        <%= form_with model: @invoice_item, url:invoice_invoice_item_path(@invoice, invoice_item), id: "ItemStatus-#{invoice_item.item.id}", data: {turbo: false} do |f| %>
+        <%= form_with url:invoice_invoice_item_path(@invoice, invoice_item), 
+                      id: "ItemStatus-#{invoice_item.item.id}", 
+                      method: :patch, 
+                      data: {turbo: false} do |f| 
+        %>
           <%= f.select :status, options_for_select(InvoiceItem.statuses, InvoiceItem.statuses[invoice_item.status].to_s) %>
           <%= f.submit "Update Item Status" %>
         <% end %>
