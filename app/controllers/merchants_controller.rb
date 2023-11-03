@@ -6,4 +6,8 @@ class MerchantsController < ApplicationController
   def show
     @merchant = Merchant.find(params[:merchant_id])
   end
+
+  def merchant_params
+    params.require(:merchant).permit(:all)
+  end
 end

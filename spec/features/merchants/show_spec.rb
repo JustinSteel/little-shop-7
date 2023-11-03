@@ -62,9 +62,9 @@ RSpec.describe "Merchant Dashboard" do
     visit dashboard_merchant_path(@merchant1)
 
     within ".ship-items" do
-      @merchant1.items_ready_to_ship.each do |item|
-        expect(page).to have_content "#{item.name} | Invoice ID: #{item.invoice_id}"
-        assert page.has_link?(href: merchant_invoice_path(@merchant1, item.invoice))
+      @merchant1.invoice_items.items_ready_to_ship.each do |inv_item|
+        expect(page).to have_content "#{inv_item.item.name} | Invoice ID: #{inv_item.invoice_id}"
+        assert page.has_link?(href: merchant_invoice_path(@merchant1, inv_item.invoice))
       end
     end
   end
