@@ -18,7 +18,7 @@
     <tr>
       <td><%= invoice_item.item.name %></td>
       <td><%= invoice_item.quantity %></td>
-      <td><%= invoice_item.item.unit_price %></td>
+      <td><%= "$#{format('%.2f', (invoice_item.item.unit_price / 100.0))}" %></td>
       <td>
         <%= form_with model: @invoice_item, id: "ItemStatus-#{invoice_item.item.id}", data: {turbo: false} do |f| %>
           <%= f.select :status, options_for_select(InvoiceItem.statuses, InvoiceItem.statuses[invoice_item.status].to_s) %>
