@@ -14,8 +14,6 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see invoice id, status, create date in format 'Monday, July 18, 2019'" do
-      
-
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Status: #{@invoice_1.status}")
       expect(page).to have_content("Created on: #{@invoice_1.formatted_date}")
@@ -108,7 +106,7 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     it "They see that each invoice item status is a select field" do
       within "#ItemStatus-#{@item_1a.id}" do
         expect(page).to have_css('select')
-        expect(page).to have_content("packaged") 
+        expect(page).to have_content("pending") 
       end
 
       within "#ItemStatus-#{@item_1b.id}" do
@@ -119,6 +117,19 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
       within "#ItemStatus-#{@item_1c.id}" do
         expect(page).to have_css('select')
         expect(page).to have_content("shipped") 
+      end
+    end
+
+    it "They select a new status for the item, click on Update Item Status" do
+      within "#ItemStatus-#{@item_1a.id}" do
+        select("packaged", from: :status)
+        click_button("Update Item Status")
+      end
+
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
+
+      within "#ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_content("packaged")
       end
     end
   end
