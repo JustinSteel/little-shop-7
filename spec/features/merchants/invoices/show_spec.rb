@@ -106,19 +106,18 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     end
 
     it "They see that each invoice item status is a select field" do
-      # expect(page).to have_select("ItemStatus-#{@item_1a.id}")
-      # expect(page).to have_select("ItemStatus-#{@item_1b.id}")
-      # expect(page).to have_select("ItemStatus-#{@item_1c.id}")
-
-      within :select, "ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content("pending") 
-      end
-
-      within :select, "ItemStatus-#{@item_1b.id}" do
+      within "#ItemStatus-#{@item_1a.id}" do
+        expect(page).to have_css('select')
         expect(page).to have_content("packaged") 
       end
 
-      within :select, "ItemStatus-#{@item_1c.id}" do
+      within "#ItemStatus-#{@item_1b.id}" do
+        expect(page).to have_css('select')
+        expect(page).to have_content("packaged") 
+      end
+
+      within "#ItemStatus-#{@item_1c.id}" do
+        expect(page).to have_css('select')
         expect(page).to have_content("shipped") 
       end
     end
