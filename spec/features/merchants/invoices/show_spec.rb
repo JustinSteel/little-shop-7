@@ -54,12 +54,12 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
 
         expect(page).to have_content(@item_1a.name)
         expect(page).to have_content("$#{format('%.2f', (@item_1a.unit_price / 100.0))}")
-        expect(page).to have_content(@invoice_item_1a.status)
+        expect(page).to have_content(@invoice_item_1a.status.capitalize)
         expect(page).to have_content(@invoice_item_1a.quantity)
 
         expect(page).to have_content(@item_1b.name)
         expect(page).to have_content("$#{format('%.2f', (@item_1b.unit_price / 100.0))}")
-        expect(page).to have_content(@invoice_item_1b.status)
+        expect(page).to have_content(@invoice_item_1b.status.capitalize)
         expect(page).to have_content(@invoice_item_1b.quantity)
       end
     end
@@ -106,44 +106,44 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     it "They see that each invoice item status is a select field" do
       within "#ItemStatus-#{@item_1a.id}" do
         expect(page).to have_css('select')
-        expect(page).to have_content("pending") 
+        expect(page).to have_content("Pending") 
       end
 
       within "#ItemStatus-#{@item_1b.id}" do
         expect(page).to have_css('select')
-        expect(page).to have_content("packaged") 
+        expect(page).to have_content("Packaged") 
       end
 
       within "#ItemStatus-#{@item_1c.id}" do
         expect(page).to have_css('select')
-        expect(page).to have_content("shipped") 
+        expect(page).to have_content("Shipped") 
       end
     end
 
     it "They select a new status for the item, click on Update Item Status" do
       within "#ItemStatus-#{@item_1a.id}" do
-        select("packaged", from: :status)
+        select("Packaged", from: :status)
         click_button("Update Item Status")
       end
 
       expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
-
+save_and_open_page
       within "#ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content("packaged")
+        expect(page).to have_content("Packaged")
       end
 
       within "#ItemStatus-#{@item_1b.id}" do
-        expect(page).to have_content("packaged")
+        expect(page).to have_content("Packaged")
       end
 
       within "#ItemStatus-#{@item_1c.id}" do
-        expect(page).to have_content("shipped")
+        expect(page).to have_content("Shipped")
       end
     end
 
     xit "They see an error message when status is not changed, and page rerenders" do
       within "#ItemStatus-#{@item_1a.id}" do
-        select("pending", from: :status)
+        select("Pending", from: :status)
         click_button("Update Item Status")
       end
 

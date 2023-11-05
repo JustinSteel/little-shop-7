@@ -24,7 +24,12 @@
                       method: :patch, 
                       data: {turbo: false} do |f| 
         %>
-          <%= f.select :status, options_for_select(InvoiceItem.statuses, InvoiceItem.statuses[invoice_item.status].to_s) %>
+          <%= f.select :status, options_for_select([["Pending", "pending"], 
+                                                    ["Packaged", "packaged"], 
+                                                    ["Shipped", "shipped"]],
+                                                    invoice_item.status
+                                                  ) 
+          %>
           <%= f.submit "Update Item Status" %>
         <% end %>
       </td>
