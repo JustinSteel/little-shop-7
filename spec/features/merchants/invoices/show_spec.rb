@@ -127,7 +127,7 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
       end
 
       expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
-save_and_open_page
+
       within "#ItemStatus-#{@item_1a.id}" do
         expect(page).to have_content("Packaged")
       end
@@ -141,16 +141,17 @@ save_and_open_page
       end
     end
 
-    xit "They see an error message when status is not changed, and page rerenders" do
+    it "They see an error message when status is not changed, and page rerenders" do
       within "#ItemStatus-#{@item_1a.id}" do
         select("Pending", from: :status)
         click_button("Update Item Status")
       end
 
+      expect(current_path).to eq(merchant_invoice_path(@merchant_1, @invoice_1))
       expect(page).to have_content("Status must be changed")
 
       within "#ItemStatus-#{@item_1a.id}" do
-        expect(page).to have_content("packaged")
+        expect(page).to have_content("Packaged")
       end
     end
 
