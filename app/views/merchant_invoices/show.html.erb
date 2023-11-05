@@ -1,8 +1,8 @@
-<%= "Invoice ##{@invoice.id}" %>
-<%= "Status: #{@invoice.status}" %>
-<%= "Created on: #{@invoice.formatted_date}" %>
-<%= "Total Revenue: $#{format('%.2f', (@invoice.total_revenue / 100.0))}" %>
-<%= "Customer: #{@invoice.customer_full_name}" %>
+<p><%= "Invoice ##{@invoice.id}" %></p>
+<p><%= "Status: #{@invoice.status}" %></p>
+<p><%= "Created on: #{@invoice.formatted_date}" %></p>
+<p><%= "Total Revenue: $#{format('%.2f', (@invoice.total_revenue / 100.0))}" %></p>
+<p><%= "Customer: #{@invoice.customer_full_name}" %></p>
 
 <p>Items on this Invoice:</p>
 <table id="ItemTable">
