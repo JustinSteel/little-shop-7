@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/", to: "dashboards#welcome"
 
-    resources :merchants, only: [:show, :edit, :update]
+    resources :merchants, only: [:index, :show, :edit, :update]
   end
 end
