@@ -9,6 +9,6 @@ class InvoiceItem < ApplicationRecord
   validates :status, presence: true
 
   def self.items_ready_to_ship
-    where.not(status: "shipped")
+    where.not(status: "shipped").order(created_at: :asc)
   end
 end
