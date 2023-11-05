@@ -12,7 +12,7 @@ RSpec.describe "Merchant Invoices Index", type: :feature do
     before(:each) do
       @merchant_1 = create(:merchant)
       @item_1 = create(:item, merchant: @merchant_1)
-   
+
       @invoices_with_item = []
       @invoices_without_item = []
 
@@ -54,5 +54,4 @@ RSpec.describe "Merchant Invoices Index", type: :feature do
       end
     end
   end
-  
 end

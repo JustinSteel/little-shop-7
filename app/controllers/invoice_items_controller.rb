@@ -12,6 +12,7 @@ class InvoiceItemsController < ApplicationController
   end
 
   private
+
   def invoice_item_params
     params[:status] = params[:status].to_i if params[:status].present?
     params.permit(:status)
