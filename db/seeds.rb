@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require File.expand_path("../../config/environment", __FILE__)
+# require File.expand_path("../../lib/tasks/csv_load.rake", __FILE__)
+require "rake"
+
+Rake::Task["csv_load:all"].invoke
