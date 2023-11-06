@@ -19,7 +19,7 @@
       <td><%= invoice_item.quantity %></td>
       <td><%= "$#{format('%.2f', (invoice_item.item.unit_price / 100.0))}" %></td>
       <td>
-        <%= form_with url:invoice_invoice_item_path(@invoice, invoice_item), 
+        <%= form_with url:merchant_invoice_item_path(@merchant, invoice_item),
                       id: "ItemStatus-#{invoice_item.item.id}", 
                       method: :patch, 
                       data: {turbo: false} do |f| 

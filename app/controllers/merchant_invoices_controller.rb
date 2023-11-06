@@ -4,6 +4,13 @@ class MerchantInvoicesController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @invoice = Invoice.find(params[:id])
+  end
+
+  private
+
+  def merchant_invoice_params
+    params.require(:merchant_id).permit(:all)
   end
 end
