@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   end
 
   resources :merchants do
-    resources :items, controller: "merchant_items", only: [:index, :show]
-    resources :invoices, controller: "merchant_invoices", only: [:index, :show]
-    resources :invoice_items, controller: "merchant_invoice_items", only: [:update]
     member do
       get "dashboard", action: :show
     end
+    resources :items, controller: "merchant_items", param: :item_id, only: [:index, :show]
+    resources :invoices, controller: "merchant_invoices", param: :invoice_id, only: [:index, :show]
+    resources :invoice_items, controller: "merchant_invoice_items", param: :invoice_item, only: [:update]
   end
 end
