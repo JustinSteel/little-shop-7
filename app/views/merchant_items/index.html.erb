@@ -1,0 +1,7 @@
+<h1><%= @merchant.name %> Index</h1>
+<section class="items">
+  <h3>Items</h3>
+  <% @merchant.items.each do | item | %>
+      <p><%= item.name %></p>
+  <% end %>
+</section>
