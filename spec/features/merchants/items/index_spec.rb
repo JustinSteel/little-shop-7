@@ -22,4 +22,23 @@ RSpec.describe "Merchant items index page" do
 
     expect(page).to_not have_content create(:item).name  # weak test but test data has shared names for items
   end
+
+  it "has a link to the item show page from the item name" do
+    # 7. Merchant Items Show Page
+    #
+    # As a merchant,
+    # When I click on the name of an item from the merchant items index page, (merchants/:merchant_id/items)
+    # Then I am taken to that merchant's item's show page (/merchants/:merchant_id/items/:item_id)
+    # And I see all of the item's attributes including:
+    #
+    # - Name
+    # - Description
+    # - Current Selling Price
+    visit merchant_items_path(@merchant1)
+
+    item = @merchant1.items.first
+    click_on item.name
+
+    expect(page).to have_current_path merchant_item_path(@merchant1, item)
+  end
 end

@@ -2,6 +2,6 @@
 <section class="items">
   <h3>Items</h3>
   <% @merchant.items.each do | item | %>
-      <p><%= item.name %></p>
+      <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
   <% end %>
 </section>
