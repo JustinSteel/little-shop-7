@@ -8,16 +8,16 @@ RSpec.describe "Merchants-Index page" do
     visit admin_merchants_path
     expect(page).to have_content("Admin Merchant Index")
 
-    expect(page).to have_content(@merchant1.name)
-    expect(page).to have_content(@merchant2.name)
-    expect(page).to have_content(@merchant3.name)
-    expect(page).to have_content(@merchant4.name)
-    expect(page).to have_content(@merchant5.name)
-    expect(page).to have_content(@merchant6.name)
-    expect(page).to have_content(@merchant7.name)
-    expect(page).to have_content(@merchant8.name)
-    expect(page).to have_content(@merchant9.name)
-    expect(page).to have_content(@merchant10.name)
+    expect(page).to have_link(@merchant1.name)
+    expect(page).to have_link(@merchant2.name)
+    expect(page).to have_link(@merchant3.name)
+    expect(page).to have_link(@merchant4.name)
+    expect(page).to have_link(@merchant5.name)
+    expect(page).to have_link(@merchant6.name)
+    expect(page).to have_link(@merchant7.name)
+    expect(page).to have_link(@merchant8.name)
+    expect(page).to have_link(@merchant9.name)
+    expect(page).to have_link(@merchant10.name)
   end 
 
   it "has a enable button on disabled merchants" do
@@ -56,4 +56,4 @@ RSpec.describe "Merchants-Index page" do
     click_link("Create New Merchant")
     expect(current_path).to eq(new_admin_merchant_path)
   end
-end 
+end

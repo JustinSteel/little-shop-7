@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   # root "welcome#index"
   namespace :admin do
     get "/", to: "dashboards#welcome"
+    resources :merchants, only: [:show, :index]
+  end
 
-    resources :merchants, expect: :destroy
+  resources :merchants, param: :id do
+    resources :items, only: [:index]
+    resources :invoices, only: [:index]
+    get "dashboard", on: :member, action: :show
   end
 end
