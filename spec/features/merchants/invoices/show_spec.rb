@@ -25,7 +25,7 @@ RSpec.describe "Merchant Invoice Show", type: :feature do
     it "They see invoice id, status, create date in format 'Monday, July 18, 2019'" do
       expect(page).to have_content("Invoice ##{@invoice_1.id}")
       expect(page).to have_content("Status: #{@invoice_1.status}")
-      expect(page).to have_content("Created on: #{@invoice_1.to_formatted_s(:merchants)}")
+      expect(page).to have_content("Created on: #{@invoice_1.created_at.to_formatted_s(:merchants)}")
     end
 
     it "They see customer first and last name" do
