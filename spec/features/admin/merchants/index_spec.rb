@@ -43,4 +43,17 @@ RSpec.describe "Merchants-Index page" do
     expect(find("#merchant-#{merchant3.id}")).to have_button("Disable #{merchant3.name}")
     expect(find("#merchant-#{merchant1.id}")).to_not have_button("Disable #{merchant1.name}")
   end
+
+  it "has a link to create a new merchant" do 
+    visit admin_merchants_path
+
+    expect(page).to have_link("Create New Merchant")
+  end
+
+  it "directs a user to a new-merchant-page when clicking link" do 
+    visit admin_merchants_path
+
+    click_link("Create New Merchant")
+    expect(current_path).to eq(new_admin_merchant_path)
+  end
 end 
