@@ -16,28 +16,6 @@ class Merchant < ApplicationRecord
 
   # the WHERE clause filters the results given the instance self.id
   def customers_ordered_by_num_trx(sorted = :desc)
-    # sql = <<-SQL
-    #   SELECT
-    #     CUSTOMERS.*,
-    #     count(DISTINCT TRANSACTIONS.ID)
-    #   FROM
-    #     CUSTOMERS
-    #     INNER JOIN INVOICES ON CUSTOMERS.ID = INVOICES.CUSTOMER_ID
-    #     INNER JOIN INVOICE_ITEMS ON INVOICES.ID = INVOICE_ITEMS.INVOICE_ID
-    #     INNER JOIN ITEMS ON INVOICE_ITEMS.ITEM_ID = ITEMS.ID
-    #     INNER JOIN TRANSACTIONS ON TRANSACTIONS.INVOICE_ID = INVOICES.ID
-    #   WHERE
-    #     ITEMS.MERCHANT_ID = #{id} AND
-    #     TRANSACTIONS.RESULT = 0
-    #   GROUP BY
-    #     CUSTOMERS.ID
-    #   ORDER BY
-    #     count #{sorted},
-    #     first_name
-    # SQL
-    #
-    # query = ActiveRecord::Base.connection.execute(sql)
-
     Customer.find_by_sql(
       "SELECT
           CUSTOMERS.*,
