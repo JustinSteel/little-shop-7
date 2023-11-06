@@ -1,7 +1,8 @@
-<%= "Invoice ##{@invoice.id}" %>
-<%= "Status: #{@invoice.status}" %>
-<%= "Created on: #{@invoice.formatted_date}" %>
-<%= "Customer: #{@invoice.customer_full_name}" %>
+<p><%= "Invoice ##{@invoice.id}" %></p>
+<p><%= "Status: #{@invoice.status}" %></p>
+<p><%= "Created on: #{@invoice.formatted_date}" %></p>
+<p><%= "Total Revenue: $#{format('%.2f', (@invoice.total_revenue / 100.0))}" %></p>
+<p><%= "Customer: #{@invoice.customer_full_name}" %></p>
 
 <p>Items on this Invoice:</p>
 <table id="ItemTable">
@@ -16,8 +17,22 @@
     <tr>
       <td><%= invoice_item.item.name %></td>
       <td><%= invoice_item.quantity %></td>
-      <td><%= invoice_item.item.unit_price %></td>
-      <td><%= invoice_item.status %></td>
+      <td><%= "$#{format('%.2f', (invoice_item.item.unit_price / 100.0))}" %></td>
+      <td>
+        <%= form_with url:merchant_invoice_item_path(@merchant, invoice_item),
+                      id: "ItemStatus-#{invoice_item.item.id}", 
+                      method: :patch, 
+                      data: {turbo: false} do |f| 
+        %>
+          <%= f.select :status, options_for_select([["Pending", "pending"], 
+                                                    ["Packaged", "packaged"], 
+                                                    ["Shipped", "shipped"]],
+                                                    invoice_item.status
+                                                  ) 
+          %>
+          <%= f.submit "Update Item Status" %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

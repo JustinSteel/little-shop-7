@@ -1,4 +1,4 @@
-require 'faker'
+require "faker"
 
 def load_test_data
   @merchant1 = Merchant.create!(name: "No Face")
