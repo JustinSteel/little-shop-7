@@ -27,4 +27,15 @@ class Merchant < ApplicationRecord
     sprintf('%.2f', revenue)
   end
 
+  def best_day
+    day = self.invoices
+    .joins(:invoice_items, :transactions)
+    .where("transactions.result = 0")
+    .select("invoices.updated_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group("invoices.updated_at")
+    .order("revenue desc, invoices.updated_at desc")
+    .first
+    day.updated_at.strftime("%m/%d/%Y") if day
+    
+  end
 end
