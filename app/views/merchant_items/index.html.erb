@@ -1,7 +1,19 @@
 <h1><%= @merchant.name %> Index</h1>
+
 <section class="items">
   <h3>Items</h3>
-  <% @merchant.items.each do | item | %>
-      <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
-  <% end %>
+  <ul style="list-style: none">
+      <% @merchant.items.each do | item | %>
+          <li id="item-<%= item.id %>">
+            <div style="display: inline-block">
+              <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
+              <%= button_to "#{item.opp_status.delete_suffix("d").capitalize}",
+                            merchant_item_path(@merchant, item),
+                            method: :patch,
+                            data: {turbo: false},
+                            params: {status: item.opp_status}%>
+            </div>
+          </li>
+      <% end %>
+  </ul>
 </section>

@@ -10,4 +10,8 @@ class Item < ApplicationRecord
   validates :status, presence: false
 
   enum status: %w[disabled enabled]
+
+  def opp_status
+    self.disabled? ? "enabled" : "disabled"
+  end
 end
