@@ -16,21 +16,21 @@ RSpec.describe Item do
     it { should define_enum_for(:status).with_values(disabled: 0, enabled: 1) }
   end
 
-  describe 'test methods' do
+  describe 'instance methods' do
     before(:each) do
-      @merchant = create(:merchant)
+      @merchant_1 = create(:merchant)
       @invoice_1 = create(:invoice, customer: create(:customer))
       @invoice_2 = create(:invoice, customer: create(:customer))
       @invoice_3 = create(:invoice, customer: create(:customer))
       @invoice_4 = create(:invoice, customer: create(:customer))
       @invoice_5 = create(:invoice, customer: create(:customer))
       @invoice_6 = create(:invoice, customer: create(:customer))
-      @item_1 = create(:item, merchant: @merchant, unit_price: 1234)
-      @item_2 = create(:item, merchant: @merchant)
-      @item_3 = create(:item, merchant: @merchant)
-      @item_4 = create(:item, merchant: @merchant)
-      @item_5 = create(:item, merchant: @merchant)
-      @item_6 = create(:item, merchant: @merchant)
+      @item_1 = create(:item, merchant: @merchant_1, unit_price: 2000)
+      @item_2 = create(:item, merchant: @merchant_1)
+      @item_3 = create(:item, merchant: @merchant_1)
+      @item_4 = create(:item, merchant: @merchant_1)
+      @item_5 = create(:item, merchant: @merchant_1)
+      @item_6 = create(:item, merchant: @merchant_1)
       @invoice_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, unit_price: 50000, quantity: 5)
       @invoice_item_2 = create(:invoice_item, invoice: @invoice_2, item: @item_2, unit_price: 40000, quantity: 1)
       @invoice_item_3 = create(:invoice_item, invoice: @invoice_3, item: @item_3, unit_price: 30000, quantity: 1)
