@@ -56,4 +56,20 @@ RSpec.describe "Merchants-Index page" do
     click_link("Create New Merchant")
     expect(current_path).to eq(new_admin_merchant_path)
   end
+
+  it "shows top 5 merchants by revenue" do
+    load_best_test_data
+
+    visit admin_merchants_path
+
+    expect(find("#top_5")).to have_content(@merchant1.name)
+    expect(find("#top_5")).to have_content(@merchant2.name)
+    expect(find("#top_5")).to have_content(@merchant3.name)
+    expect(find("#top_5")).to have_content(@merchant4.name)
+    expect(find("#top_5")).to have_content(@merchant5.name)
+    expect(find("#top_5")).to_not have_content(@merchant6.name)
+    expect(find("#top_5")).to_not have_content(@merchant7.name)
+    
+
+  end
 end

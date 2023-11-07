@@ -9,4 +9,8 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
   validates :status, presence: false
+
+  def self.top_five_by_revenue
+    require 'pry'; binding.pry
+  end
 end
