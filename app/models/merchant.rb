@@ -26,5 +26,4 @@ class Merchant < ApplicationRecord
     .sum("invoice_items.quantity * invoice_items.unit_price")
     sprintf('%.2f', revenue)
   end
-
 end
