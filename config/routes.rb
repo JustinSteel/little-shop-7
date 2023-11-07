@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root "welcome#index"
   namespace :admin do
     get "/", to: "dashboards#welcome"
-    resources :merchants, except: :destroy 
+    resources :merchants, except: [:destroy]
   end
 
   resources :merchants, param: :id do

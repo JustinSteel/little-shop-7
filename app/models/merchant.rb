@@ -9,4 +9,33 @@ class Merchant < ApplicationRecord
 
   validates :name, presence: true
   validates :status, presence: false
+
+  def self.top_five_by_revenue
+    joins(invoices: [:invoice_items, :transactions])
+    .select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .where("transactions.result = 0")
+    .group(:id)
+    .order("revenue desc")
+    .limit(5)
+  end
+
+  def total_revenue
+    revenue = self.invoices
+    .joins(:invoice_items, :transactions)
+    .where("transactions.result = 0")
+    .sum("invoice_items.quantity * invoice_items.unit_price")
+    sprintf('%.2f', revenue)
+  end
+
+  def best_day
+    day = self.invoices
+    .joins(:invoice_items, :transactions)
+    .where("transactions.result = 0")
+    .select("invoices.updated_at, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+    .group("invoices.updated_at")
+    .order("revenue desc, invoices.updated_at desc")
+    .first
+    day.updated_at.strftime("%m/%d/%Y") if day
+    
+  end
 end
