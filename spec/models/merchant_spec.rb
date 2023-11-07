@@ -3,6 +3,11 @@ require "rails_helper"
 RSpec.describe Merchant do
   describe "relationships" do
     it { should have_many :items }
+    it { should have_many(:invoice_items).through(:items) }
+    it { should have_many(:invoices).through(:invoice_items) }
+    it { should have_many(:transactions).through(:invoices) }
+    it { should have_many(:customers).through(:invoices) }
+
   end
 
   describe "validations" do
@@ -70,7 +75,7 @@ RSpec.describe Merchant do
 
     describe "#top_five_items" do
       it 'returns top 5 items' do
-        expect(@merchant.top_five_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
+        expect(@merchant_1.top_five_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
       end
     end
   end
