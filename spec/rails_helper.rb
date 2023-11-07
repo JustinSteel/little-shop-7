@@ -67,6 +67,10 @@ RSpec.configure do |config|
 
   # Factory Bot
   config.include FactoryBot::Syntax::Methods
+
+  def saop
+    save_and_open_page
+  end
 end
 
 Shoulda::Matchers.configure do |config|

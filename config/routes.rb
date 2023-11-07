@@ -8,13 +8,12 @@ Rails.application.routes.draw do
     get "/", to: "dashboards#welcome"
   end
 
-  resources :merchants, param: :id do
-    resources :items, controller: "merchant_items", only: [:index]
-    resources :invoices, controller: "merchant_invoices", only: [:index, :show]
-    get "dashboard", on: :member, action: :show
-  end
-
-  resources :invoices do
-    resources :invoice_items, only: [:update]
+  resources :merchants do
+    member do
+      get "dashboard", action: :show
+    end
+    resources :items, controller: "merchant_items", param: :item_id, only: [:index, :show, :update, :edit]
+    resources :invoices, controller: "merchant_invoices", param: :invoice_id, only: [:index, :show]
+    resources :invoice_items, controller: "merchant_invoice_items", param: :invoice_item, only: [:update]
   end
 end

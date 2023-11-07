@@ -3,14 +3,11 @@ class Invoice < ApplicationRecord
   has_many :transactions
   has_many :invoice_items
   has_many :items, through: :invoice_items
-
-  enum status: ["completed", "cancelled", "in progress"]
+  has_many :merchants, through: :items
 
   validates :status, presence: true
 
-  def formatted_date
-    created_at.strftime("%A, %B %d, %Y")
-  end
+  enum status: ["completed", "cancelled", "in progress"]
 
   def customer_full_name
     "#{customer.first_name} #{customer.last_name}"

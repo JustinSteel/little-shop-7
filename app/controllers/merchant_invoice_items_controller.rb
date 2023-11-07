@@ -1,6 +1,6 @@
-class InvoiceItemsController < ApplicationController
+class MerchantInvoiceItemsController < ApplicationController
   def update
-    @invoice_item = InvoiceItem.find(params[:id])
+    @invoice_item = InvoiceItem.find(params[:invoice_item])
 
     if params[:status] != @invoice_item.status
       @invoice_item.update(invoice_item_params)
@@ -12,6 +12,7 @@ class InvoiceItemsController < ApplicationController
   end
 
   private
+
   def invoice_item_params
     params[:status] = params[:status].to_i if params[:status].present?
     params.permit(:status)
