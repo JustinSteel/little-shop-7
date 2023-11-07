@@ -19,6 +19,10 @@ RSpec.describe Merchant do
     it "#total_revenue" do
       expect(@merchant2.total_revenue).to eq("300.00")
     end
+
+    it "#best_day" do
+    expect(@merchant2.best_day).to eq("03/15/2023")
+    end
   end
 
   describe "class methods" do
