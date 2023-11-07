@@ -32,3 +32,12 @@
 <% end %>
 
 <%= link_to "Create New Merchant", new_admin_merchant_path %>
+
+<h2>Top 5</h2>
+<section id="top_5">
+    <ol type="1">
+  <% Merchant.top_five_by_revenue.each do |merchant| %>
+      <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Total Revenue: $<%= merchant.total_revenue %></li>
+  <% end %>
+    </ol>
+</section>
