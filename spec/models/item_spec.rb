@@ -15,4 +15,15 @@ RSpec.describe Item do
     it { should validate_numericality_of :unit_price }
     it { should define_enum_for(:status).with_values(disabled: 0, enabled: 1) }
   end
+
+  describe "instance methods" do
+    describe "#opp_status" do
+      it "shows the opposite status of the item" do
+        load_test_data
+        expect(@item7.opp_status).to eq "disabled"
+        @item7.update!(status: "disabled")
+        expect(@item7.opp_status).to eq "enabled"
+      end
+    end
+  end
 end
