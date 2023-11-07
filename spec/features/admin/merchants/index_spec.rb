@@ -70,16 +70,13 @@ RSpec.describe "Merchants-Index page" do
     expect(find("#top_5")).to_not have_content(@merchant4.name)
     expect(find("#top_5")).to_not have_content(@merchant6.name)
 
-    within "#top_5" do
-      
-    end
   end
 
   it "shows top 5 merchants best day" do
     load_best_test_data
 
     visit admin_merchants_path
-    within "#top_5" do
+    
     expect(find("#top_5")).to have_content("#{@merchant3.name} Total Revenue: $400.00, Top Sales Day: 05/25/2023")
     expect(find("#top_5")).to have_content("#{@merchant2.name} Total Revenue: $300.00, Top Sales Day: 03/15/2023")
     expect(find("#top_5")).to have_content("#{@merchant5.name} Total Revenue: $200.00, Top Sales Day: 07/01/2023")
@@ -88,5 +85,4 @@ RSpec.describe "Merchants-Index page" do
     expect(find("#top_5")).to_not have_content(@merchant4.name)
     expect(find("#top_5")).to_not have_content(@merchant6.name)
     end
-  end
 end
