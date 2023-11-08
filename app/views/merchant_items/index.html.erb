@@ -17,3 +17,18 @@
       <% end %>
   </ul>
 </section>
+
+<section class="topItems">
+  <h3>Top Items</h3>
+  <% ranking = 1 %>
+  <% @merchant.top_five_items.each do |item| %>
+    <div id=<%="topItem-#{item.id}"%>>
+      <p> 
+        <%= "#{ranking}. "%>
+        <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
+        <%= " - $#{(item.revenue_sold / 100.0).round(0)} in sales" %>
+      </p>
+    </div>
+    <% ranking += 1 %>
+  <% end %>
+</section>
