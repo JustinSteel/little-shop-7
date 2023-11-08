@@ -2,3 +2,5 @@
 
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= @item.unit_price %></p>
+
+<%= link_to "Edit Item", edit_merchant_item_path(@item.merchant, @item), data: {turbo: false} %>

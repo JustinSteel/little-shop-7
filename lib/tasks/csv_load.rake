@@ -8,6 +8,8 @@ namespace :csv_load do
     end
 
     ActiveRecord::Base.connection.reset_pk_sequence!("customers")
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("customers")
     p "Customers loaded from CSV"
     # require "byebug"; byebug
   end
@@ -19,6 +21,8 @@ namespace :csv_load do
     CSV.foreach("./db/data/invoices.csv", headers: true) do |row|
       Invoice.create!(row.to_h)
     end
+
+    ActiveRecord::Base.connection.reset_pk_sequence!("invoices")
 
     ActiveRecord::Base.connection.reset_pk_sequence!("invoices")
     p "Invoice loaded from CSV"
