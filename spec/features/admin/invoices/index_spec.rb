@@ -8,7 +8,6 @@ RSpec.describe "Admin Invoices Dashboard" do
   # US 32
   describe "As an admin, When I visit the admin invoice index (/admin/invoice)" do
     it "I see the id of each invoice in the system" do
-
       visit admin_invoices_path
 
       within("#invoice-#{@invoice_1a.id}") do

@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
-  def self.incomplete_invoice 
+  def self.incomplete_invoice
     where("status != 0")
   end
 
