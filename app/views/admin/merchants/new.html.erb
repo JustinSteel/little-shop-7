@@ -1,4 +1,8 @@
-<h2> Create a new merchant </h2>
+<%= render partial: "app_partials/header", locals: {header: "Create New Merchant"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: admin_path,
+                    link_2: "Invoices", l2_pth: admin_invoices_path,
+                    link_3: "Merchants", l3_pth: admin_merchants_path} %>
 
 <%= form_with url: admin_merchants_path, method: :post, data:{turbo: false} do |f| %>
   <%= f.label :name %>

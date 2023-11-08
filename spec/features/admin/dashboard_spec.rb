@@ -10,8 +10,8 @@ RSpec.describe "Admin Dashboard" do
   it "has links to admin merchants and invoices index pages" do
     visit admin_path
 
-    expect(page).to have_link("Admin: Merchants")
-    expect(page).to have_link("Admin: Invoices")
+    expect(page).to have_link("Merchants")
+    expect(page).to have_link("Invoices")
   end
 
   describe "statistics section" do
