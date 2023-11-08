@@ -1,16 +1,16 @@
 require 'faker'
 
 def load_test_data
-  @merchant1 = Merchant.create!(name: "No Face")
-  @merchant2 = Merchant.create!(name: "Totoro")
-  @merchant3 = Merchant.create!(name: "Kiki")
-  @merchant4 = Merchant.create!(name: "Howl")
-  @merchant5 = Merchant.create!(name: "Calcifer")
-  @merchant6 = Merchant.create!(name: "Ashitaka")
-  @merchant7 = Merchant.create!(name: "Catbus")
-  @merchant8 = Merchant.create!(name: "Haku")
-  @merchant9 = Merchant.create!(name: "Chihiro")
-  @merchant10 = Merchant.create!(name: "Mononoke")
+  @merchant1 = Merchant.create!(name: "No Face", status: 1)
+  @merchant2 = Merchant.create!(name: "Totoro", status: 1)
+  @merchant3 = Merchant.create!(name: "Kiki", status: 1)
+  @merchant4 = Merchant.create!(name: "Howl", status: 1)
+  @merchant5 = Merchant.create!(name: "Calcifer", status: 1)
+  @merchant6 = Merchant.create!(name: "Ashitaka", status: 1)
+  @merchant7 = Merchant.create!(name: "Catbus", status: 1)
+  @merchant8 = Merchant.create!(name: "Haku", status: 1)
+  @merchant9 = Merchant.create!(name: "Chihiro", status: 1)
+  @merchant10 = Merchant.create!(name: "Mononoke", status: 1)
 
   @customer_1 = Customer.create!(first_name: "Frodo", last_name: "Baggins")
   @customer_2 = Customer.create!(first_name: "Samwise", last_name: "Gamgee")
