@@ -29,6 +29,9 @@ RSpec.describe "Merchants-Index page" do
     expect(find("#merchant-#{merchant1.id}")).to have_button("Enable #{merchant1.name}")
     expect(find("#merchant-#{merchant2.id}")).to_not have_button("Enable #{merchant2.name}")
     expect(find("#merchant-#{merchant3.id}")).to_not have_button("Enable #{merchant3.name}")
+    
+    click_button("Enable #{merchant1.name}")
+    expect(find("#merchant-#{merchant1.id}")).to_not have_button("Enable #{merchant1.name}")
   end
 
   it "has a disable button on enabled merchants" do
@@ -41,6 +44,10 @@ RSpec.describe "Merchants-Index page" do
     expect(find("#merchant-#{merchant2.id}")).to have_button("Disable #{merchant2.name}")
     expect(find("#merchant-#{merchant3.id}")).to have_button("Disable #{merchant3.name}")
     expect(find("#merchant-#{merchant1.id}")).to_not have_button("Disable #{merchant1.name}")
+
+    click_button("Disable #{merchant3.name}")
+    expect(find("#merchant-#{merchant3.id}")).to_not have_button("Disable #{merchant3.name}")
+
   end
 
   it "has a link to create a new merchant" do
