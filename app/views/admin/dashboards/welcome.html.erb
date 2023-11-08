@@ -1,1 +1,16 @@
 <h1> Admin Dashboard </h1>
+
+<p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
+<p><%= link_to "Admin: Invoices", "/admin/invoices" %></p>
+
+<p> Top 5 Customers: </p>
+<% Customer.top_customers.each do |customer| %>
+<section id="customer-<%= customer.id%>"> 
+  <%= "#{customer.first_name} #{customer.last_name}: #{customer.count} Transactions" %>
+  </section>
+<% end %>
+
+<p> Incomplete Invoices: </p> 
+<% Invoice.incomplete_invoice.each do |invoice| %>
+  <p><%= link_to "Invoice #" "#{invoice.id}" "-" "#{invoice.formatted_date}", "/admin/invoices/show" %></p>
+<% end %>

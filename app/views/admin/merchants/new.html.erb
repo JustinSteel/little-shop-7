@@ -1,0 +1,7 @@
+<h2> Create a new merchant </h2>
+
+<%= form_with url: admin_merchants_path, method: :post, data:{turbo: false} do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Submit" %>
+<% end %>
