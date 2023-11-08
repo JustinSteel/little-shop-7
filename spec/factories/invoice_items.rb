@@ -1,5 +1,3 @@
-require "faker"
-
 FactoryBot.define do
   factory :invoice_item do
     quantity { rand(1..10) }

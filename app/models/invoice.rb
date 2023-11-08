@@ -16,4 +16,12 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def self.incomplete_invoice
+    where("status != 0")
+  end
+
+  def formatted_date
+    created_at.strftime("%A, %B %d, %Y")
+  end
 end
