@@ -1,0 +1,33 @@
+<%= render partial: "app_partials/header", locals: {header: "Merchant Dashboard"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: dashboard_merchant_path(@merchant),
+                    link_2: "Items", l2_pth: merchant_items_path(@merchant),
+                    link_3: "Invoices", l3_pth: merchant_invoices_path(@merchant)} %>
+
+<h2><%= @merchant.name %></h2>
+<p><%= link_to "#{@merchant.name} Items", merchant_items_path(@merchant) %></p>
+<p><%= link_to "#{@merchant.name} Invoices", merchant_invoices_path(@merchant) %></p>
+
+<section class="ship-items">
+  <h3>Items to Ship</h3>
+  <% @merchant.invoice_items.items_ready_to_ship.each do | inv_item | %>
+    <section class="inv-item-<%= inv_item.id %>">
+      <div style="display: inline-block">
+        <%= inv_item.item.name %> |
+        <%= link_to "Invoice ID: #{inv_item.invoice_id}",
+                    merchant_invoice_path(@merchant, inv_item.invoice),
+                    data: {turbo: false} %> |
+        Created: <%= inv_item.created_at.to_formatted_s(:merchants) %>
+      </div>
+    </section>
+  <% end %>
+</section>
+
+<section class="favorite-customers">
+  <h3>Favorite Customers</h3>
+  <% @merchant.favorite_customers.each do | cust | %>
+      <p>
+        <%= "#{cust.first_name} #{cust.last_name} | Transactions: #{cust.count}" %>
+      </p>
+  <% end %>
+</section>

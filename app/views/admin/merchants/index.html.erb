@@ -1,0 +1,53 @@
+<%= render partial: "app_partials/header", locals: {header: "Admin Merchant Index"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: admin_path,
+                    link_2: "Invoices", l2_pth: admin_invoices_path,
+                    link_3: "Merchants", l3_pth: admin_merchants_path} %>
+
+  <% @merchants.each do |merchant| %>
+    <%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %>
+  <% end %> 
+
+
+<h2> Enabled Merchants </h2>
+  <% @merchants.each do |merchant| %>
+  <% if merchant.status == "enabled" %>
+    <section id="merchant-<%= merchant.id %>">
+    <p><%= link_to "#{merchant.name}", admin_merchants_path(merchant) %>
+<!--      <p><%#= form_with url: "/admin/merchants/#{merchant.id}?status=disabled", method: :patch, data: {turbo: false} do |f| %></p>-->
+        <%#= f.hidden_field :status, :value => "disabled" %>
+        <%#= f.submit "Disable #{merchant.name}" %>
+    <%# end %>
+        <%= button_to "Disable #{merchant.name}",
+                      admin_merchant_path(merchant),
+                      method: :patch,
+                      data: {turbo: false},
+                      params: {status: "disabled"} %>
+  </section>
+  <% end %>
+<% end %>
+
+<h2> Disabled Merchants </h2>
+  <% @merchants.each do |merchant| %>
+  <% if merchant.status != "enabled" %>
+    <section id="merchant-<%= merchant.id %>">
+    <p><%= link_to "#{merchant.name}", admin_merchants_path(merchant) %>
+      <p><%= form_with url: "/admin/merchants/#{merchant.id}?status=enabled", method: :patch, data: {turbo: false} do |f| %></p>
+        <%= f.hidden_field :status, :value => "enabled" %>
+        <%= f.submit "Enable #{merchant.name}" %>
+    <% end %>
+  </section>
+  <% end %>
+<% end %>
+
+<%= link_to "Create New Merchant", new_admin_merchant_path %>
+
+<h2>Top 5</h2>
+<section id="top_5">
+    <ol type="1">
+  <% Merchant.top_five_by_revenue.each do |merchant| %>
+      <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %> Total Revenue: $<%= merchant.total_revenue %>,
+      Top Sales Day: <%= merchant.best_day %> </li>
+  <% end %>
+    </ol>
+</section>

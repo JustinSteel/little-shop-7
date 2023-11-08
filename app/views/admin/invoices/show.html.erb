@@ -1,0 +1,28 @@
+<%= render partial: "app_partials/header", locals: {header: "Invoice #{@invoice.id}"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: admin_path,
+                    link_2: "Invoices", l2_pth: admin_invoices_path,
+                    link_3: "Merchants", l3_pth: admin_merchants_path} %>
+<br>
+<div id="invoice-details">
+  <p>Date Created: <%= @invoice.formatted_date %></p>
+  <p>Customer: <%= @invoice.customer_full_name %></p>
+  <p>Status: <%= @invoice.status %></p>
+</div>
+<br>
+<div id="invoice_items-details">
+  <h4>Invoice Items</h4>
+  <br>
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <div id="invoice_item-<%= invoice_item.id %>">
+      <h4><%= invoice_item.item.name %></h4>
+      <p>Quantity: <%= invoice_item.quantity %></p>
+      <p>Unit Purchase Price: <%= invoice_item.unit_price %></p>
+      <p>Status: <%= invoice_item.status %></p>
+    </div>
+  <% end %>
+</div>  
+<br>
+<div id="total-revenue">
+  <p>Total Revenue: <%= @invoice.total_revenue %></p>
+</div>

@@ -1,0 +1,44 @@
+<%= render partial: "app_partials/header", locals: {header: "#{@merchant.name} Invoices"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: dashboard_merchant_path(@merchant),
+                    link_2: "Items", l2_pth: merchant_items_path(@merchant),
+                    link_3: "Invoices", l3_pth: merchant_invoices_path(@merchant)} %>
+
+<p><%= "Invoice ##{@invoice.id}" %></p>
+<p><%= "Status: #{@invoice.status}" %></p>
+<p><%= "Created on: #{@invoice.created_at.to_formatted_s(:merchants)}" %></p>
+<p><%= "Total Revenue: $#{format('%.2f', (@invoice.total_revenue / 100.0))}" %></p>
+<p><%= "Customer: #{@invoice.customer_full_name}" %></p>
+
+<p>Items on this Invoice:</p>
+<table id="ItemTable">
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+
+  <% @invoice.invoice_items.each do |invoice_item| %>
+    <tr>
+      <td><%= invoice_item.item.name %></td>
+      <td><%= invoice_item.quantity %></td>
+      <td><%= "$#{format('%.2f', (invoice_item.item.unit_price / 100.0))}" %></td>
+      <td>
+        <%= form_with url:merchant_invoice_item_path(@merchant, invoice_item),
+                      id: "ItemStatus-#{invoice_item.item.id}", 
+                      method: :patch, 
+                      data: {turbo: false} do |f| 
+        %>
+          <%= f.select :status, options_for_select([["Pending", "pending"], 
+                                                    ["Packaged", "packaged"], 
+                                                    ["Shipped", "shipped"]],
+                                                    invoice_item.status
+                                                  ) 
+          %>
+          <%= f.submit "Update Item Status" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

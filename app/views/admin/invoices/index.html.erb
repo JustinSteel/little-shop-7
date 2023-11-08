@@ -1,0 +1,11 @@
+<%= render partial: "app_partials/header", locals: {header: "Admin Invoices"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: admin_path,
+                    link_2: "Invoices", l2_pth: admin_invoices_path,
+                    link_3: "Merchants", l3_pth: admin_merchants_path} %>
+
+<% @invoices.each do |invoice| %>
+  <div id='invoice-<%= invoice.id %>'>
+    <p>Invoice # <%= invoice.id %></p>
+  </div>
+<% end %>

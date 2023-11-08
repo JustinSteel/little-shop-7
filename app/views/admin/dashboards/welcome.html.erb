@@ -1,1 +1,17 @@
-<h1> Admin Dashboard </h1>
+<%= render partial: "app_partials/header", locals: {header: "Admin Dashboard"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: admin_path,
+                    link_2: "Invoices", l2_pth: admin_invoices_path,
+                    link_3: "Merchants", l3_pth: admin_merchants_path} %>
+
+<p> Top 5 Customers: </p>
+<% Customer.top_customers.each do |customer| %>
+<section id="customer-<%= customer.id%>"> 
+  <%= "#{customer.first_name} #{customer.last_name}: #{customer.count} Transactions" %>
+  </section>
+<% end %>
+
+<p> Incomplete Invoices: </p> 
+<% Invoice.incomplete_invoice.each do |invoice| %>
+  <p><%= link_to "Invoice #" "#{invoice.id}" "-" "#{invoice.formatted_date}", "/admin/invoices/show" %></p>
+<% end %>

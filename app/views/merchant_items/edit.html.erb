@@ -1,0 +1,21 @@
+<%= render partial: "app_partials/header", locals: {header: "Edit #{@item.name}"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: dashboard_merchant_path(@merchant),
+                    link_2: "Items", l2_pth: merchant_items_path(@merchant),
+                    link_3: "Invoices", l3_pth: merchant_invoices_path(@merchant)} %>
+
+<%= form_with model: @item,
+              url: merchant_item_path(@item.merchant, @item),
+              method: :patch,
+              data: {turbo: false} do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :unit_price, "Price" %>
+  <%= f.text_field :unit_price %>
+
+  <%= f.submit "Submit" %>
+<% end %>
