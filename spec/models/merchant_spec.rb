@@ -40,9 +40,17 @@ RSpec.describe Merchant do
       end
     end
 
-    describe "#favorite_customers" do
+    describe "#customers_ordered_by_num_trx" do
       it "should return the customers ordered from most transactions to least" do
         results = @merchant1.customers_ordered_by_num_trx(:desc)
+
+        expect(results).to match_array [@customer_2, @customer_1]
+      end
+    end
+
+    describe "#favorite_customers" do
+      it "should return the top 5 customers ordered from most transactions to least" do
+        results = @merchant1.favorite_customers
 
         expect(results).to match_array [@customer_2, @customer_1]
       end
