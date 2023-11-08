@@ -10,10 +10,15 @@
   <% if merchant.status == "enabled" %>
     <section id="merchant-<%= merchant.id %>">
     <p><%= link_to "#{merchant.name}", admin_merchants_path(merchant) %>
-      <p><%= form_with url: "/admin/merchants/#{merchant.id}?change=:status", method: :patch, data: {turbo: false} do |f| %></p>
-        <%= f.hidden_field :status, :value => "disabled" %>
-        <%= f.submit "Disable #{merchant.name}" %>
-    <% end %>
+<!--      <p><%#= form_with url: "/admin/merchants/#{merchant.id}?status=disabled", method: :patch, data: {turbo: false} do |f| %></p>-->
+        <%#= f.hidden_field :status, :value => "disabled" %>
+        <%#= f.submit "Disable #{merchant.name}" %>
+    <%# end %>
+        <%= button_to "Disable #{merchant.name}",
+                      admin_merchant_path(merchant),
+                      method: :patch,
+                      data: {turbo: false},
+                      params: {status: "disabled"} %>
   </section>
   <% end %>
 <% end %>
@@ -23,7 +28,7 @@
   <% if merchant.status != "enabled" %>
     <section id="merchant-<%= merchant.id %>">
     <p><%= link_to "#{merchant.name}", admin_merchants_path(merchant) %>
-      <p><%= form_with url: "/admin/merchants/#{merchant.id}?change=:status", method: :patch, data: {turbo: false} do |f| %></p>
+      <p><%= form_with url: "/admin/merchants/#{merchant.id}?status=enabled", method: :patch, data: {turbo: false} do |f| %></p>
         <%= f.hidden_field :status, :value => "enabled" %>
         <%= f.submit "Enable #{merchant.name}" %>
     <% end %>
