@@ -14,7 +14,6 @@ class MerchantItemsController < ApplicationController
   def update
     @item = Item.find(params[:item_id])
 
-
     if item_params  # only true from the edit page
       if @item.update(item_params)
         @item.save!

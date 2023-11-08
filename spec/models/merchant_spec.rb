@@ -7,7 +7,6 @@ RSpec.describe Merchant do
     it { should have_many(:invoices).through(:invoice_items) }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:customers).through(:invoices) }
-
   end
 
   describe "validations" do
@@ -44,7 +43,7 @@ RSpec.describe Merchant do
     end
   end
 
-  describe 'test methods' do
+  describe "test methods" do
     before(:each) do
       @merchant_1 = create(:merchant)
       @invoice_1 = create(:invoice, customer: create(:customer))
@@ -74,7 +73,7 @@ RSpec.describe Merchant do
     end
 
     describe "#top_five_items" do
-      it 'returns top 5 items' do
+      it "returns top 5 items" do
         expect(@merchant_1.top_five_items).to eq([@item_1, @item_2, @item_3, @item_4, @item_5])
       end
     end

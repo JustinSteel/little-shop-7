@@ -12,13 +12,13 @@ class Item < ApplicationRecord
   enum status: %w[disabled enabled]
 
   def opp_status
-    self.disabled? ? "enabled" : "disabled"
+    disabled? ? "enabled" : "disabled"
   end
 
   def revenue_sold
     InvoiceItem.joins(invoice: :transactions)
-               .where("transactions.result = ?", "0")
-               .where("invoice_items.item_id = ?", self.id)
-               .sum("invoice_items.unit_price * invoice_items.quantity")
+      .where("transactions.result = ?", "0")
+      .where("invoice_items.item_id = ?", id)
+      .sum("invoice_items.unit_price * invoice_items.quantity")
   end
 end

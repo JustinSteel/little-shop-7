@@ -63,7 +63,7 @@ RSpec.describe "Merchant items index page" do
     end
   end
 
-  describe 'Top 5 most popular items' do
+  describe "Top 5 most popular items" do
     before(:each) do
       @merchant_1 = create(:merchant)
       @invoice_1 = create(:invoice, customer: create(:customer))
@@ -94,14 +94,14 @@ RSpec.describe "Merchant items index page" do
       visit merchant_items_path(@merchant_1)
     end
 
-    it 'shows names of top 5 items ranked by total revenue' do
+    it "shows names of top 5 items ranked by total revenue" do
       expect(@item_1.name).to appear_before(@item_2.name)
       expect(@item_2.name).to appear_before(@item_3.name)
       expect(@item_3.name).to appear_before(@item_4.name)
       expect(@item_4.name).to appear_before(@item_5.name)
     end
 
-    it 'shows revenue next to each item name, item name is link to item show page' do
+    it "shows revenue next to each item name, item name is link to item show page" do
       within "#topItem-#{@item_1.id}" do
         expect(page).to have_content("1. #{@item_1.name} - $13889 in sales")
         expect(page).to have_link(@item_1.name)
