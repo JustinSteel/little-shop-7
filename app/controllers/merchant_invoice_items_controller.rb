@@ -1,6 +1,6 @@
 class MerchantInvoiceItemsController < ApplicationController
   def update
-    @invoice_item = InvoiceItem.find(params[:id])
+    @invoice_item = InvoiceItem.find(params[:invoice_item])
 
     if params[:status] != @invoice_item.status
       @invoice_item.update(invoice_item_params)
