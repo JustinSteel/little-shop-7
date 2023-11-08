@@ -4,14 +4,17 @@ class MerchantItemsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
   end
 
   def edit
+    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
   end
 
   def update
+    @merchant = Merchant.find(params[:merchant_id])
     @item = Item.find(params[:item_id])
 
     if item_params  # only true from the edit page

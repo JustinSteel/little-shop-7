@@ -1,4 +1,8 @@
-<h1>Merchant Dashboard</h1>
+<%= render partial: "app_partials/header", locals: {header: "Merchant Dashboard"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: dashboard_merchant_path(@merchant),
+                    link_2: "Items", l2_pth: merchant_items_path(@merchant),
+                    link_3: "Invoices", l3_pth: merchant_invoices_path(@merchant)} %>
 
 <h2><%= @merchant.name %></h2>
 <p><%= link_to "#{@merchant.name} Items", merchant_items_path(@merchant) %></p>

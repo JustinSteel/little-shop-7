@@ -1,3 +1,9 @@
+<%= render partial: "app_partials/header", locals: {header: "#{@merchant.name} Invoices"} %>
+<%= render partial: "app_partials/link_to_dash",
+           locals: {dash_pth: dashboard_merchant_path(@merchant),
+                    link_2: "Items", l2_pth: merchant_items_path(@merchant),
+                    link_3: "Invoices", l3_pth: merchant_invoices_path(@merchant)} %>
+
 <p><%= "Invoice ##{@invoice.id}" %></p>
 <p><%= "Status: #{@invoice.status}" %></p>
 <p><%= "Created on: #{@invoice.created_at.to_formatted_s(:merchants)}" %></p>

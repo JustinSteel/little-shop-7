@@ -4,7 +4,7 @@ RSpec.describe "Merchants-New merchant page" do
   it "has a form to create a new merchant" do
     visit new_admin_merchant_path
 
-    expect(page).to have_content("Create a new merchant")
+    expect(page).to have_content("Create New Merchant")
     expect(page).to have_content("Name")
     expect(page).to have_button("Submit")
   end
