@@ -14,4 +14,8 @@ class Customer < ApplicationRecord
 	    ORDER BY count DESC
 	    LIMIT 5")
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
