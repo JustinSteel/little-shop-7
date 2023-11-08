@@ -1,5 +1,4 @@
 namespace :csv_load do
-
   desc "Load customers from CSV"
   task customers: [:environment] do
     require "csv"
