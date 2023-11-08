@@ -1,0 +1,34 @@
+<h1><%= @merchant.name %> Index</h1>
+
+<section class="items">
+  <h3>Items</h3>
+  <ul style="list-style: none">
+      <% @merchant.items.each do | item | %>
+          <li id="item-<%= item.id %>">
+            <div style="display: inline-block">
+              <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
+              <%= button_to "#{item.opp_status.delete_suffix("d").capitalize}",
+                            merchant_item_path(@merchant, item),
+                            method: :patch,
+                            data: {turbo: false},
+                            params: {status: item.opp_status}%>
+            </div>
+          </li>
+      <% end %>
+  </ul>
+</section>
+
+<section class="topItems">
+  <h3>Top Items</h3>
+  <% ranking = 1 %>
+  <% @merchant.top_five_items.each do |item| %>
+    <div id=<%="topItem-#{item.id}"%>>
+      <p> 
+        <%= "#{ranking}. "%>
+        <%= link_to item.name, merchant_item_path(@merchant, item), data: {turbo: false} %>
+        <%= " - $#{(item.revenue_sold / 100.0).round(0)} in sales" %>
+      </p>
+    </div>
+    <% ranking += 1 %>
+  <% end %>
+</section>
