@@ -45,3 +45,34 @@
 ## Schema
 ![dbschema](./image.png)
 https://dbdesigner.page.link/ncmP6wpgHR6SPLLm7
+## Contributors GitHub Links 
+
+[Justin S.](https://github.com/justinsteel),
+[Taylor P.](https://github.com/trpubz),
+[Samuel T.](https://github.com/skyogst),
+[Blake S.](https://github.com/bserge13),
+[Terry L.](https://github.com/tlamb32)
+
+## Project Description 
+
+This project focuses on developing a usable shop management application for both a merchant and and admin. Merchants will have a dashboard, an items index and show page, and an invoices index and show page. Admins will have their own dashboard, merchants index and show pages, as well as an invoices index and show page.    
+
+## Summary of Work 
+
+* To start the project we first had to implement a way to load the individual csv's of data (customers, invoice_items, invoices, items, merchants, & transactions). 
+
+* Next, the group was broken up into two teams to tackle the two sides of the project: the Admin (Justin, Terry & Blake) and the Merchant (Taylor & Sam)
+
+## User Story Breakdown 
+* [*Admins*] An Admin needed to have the ability to: have links to all merchants (show pages), edit and create new merchants. An admins show page also shows merchant statistics (best days, total revenue, etc.), notes on revenue calculations, invoice information, and a way to control the status of a merchant or a merchants invoice.  
+
+* [*Merchants*] A Merchant needed to have the ability to: render its top customers, show items ready to ship, and have sorted invoices on its show page; merchants also had both an items and invoices index & show page. An items index held a list of items with name, description and price, a way to change an items status, their most popular items, and best sales day. The invoices page held specific invoice information such as item names, quantity ordered, sales prices (plus total revenue), as well as a way to also change the status of an invoice. 
+
+## Methods Used 
+* [*Class methods*] best_day, total_revenue, top_five_items, customers_ordered_by_num_trx, favorite_customers, opp_status, revenue, sold, customer_full_name, formatted_date, top_customers, ,items_ready_to_ship
+
+* [*Instance methods*] top_five_by_revenue and incomplete_invoice
+
+## Ideal Refactors
+
+* Add more visual/styling to the welcome/show/index pages, and get further along in the project than what was accomplished 
